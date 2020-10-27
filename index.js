@@ -1,10 +1,16 @@
+require('https').createServer().listen(process.env.PORT || 5000).on('request', function(req, res){
+  res.end('')
+});
+
+process.env["NTBA_FIX_319"] = 1;
+process.env['TELEGRAM_API_TOKEN'] = '1141579917:AAGoLMcdHD88bmYoSSqCdHjww3wYJWm0f-Y';
 const TelegramBot = require('node-telegram-bot-api');
  
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '1141579917:AAGoLMcdHD88bmYoSSqCdHjww3wYJWm0f-Y';
+
  
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
 
 bot.onText(/\/start/, function (msg) {
   
