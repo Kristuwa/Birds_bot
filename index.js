@@ -14,13 +14,13 @@ const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
 
 bot.onText(/\/start/, function (msg) {
   
-    let startMessage = 'Привіт! Вітаю на сервері сбору данних щодо пташиних гнізд на лініях електропередачі';
+    let startMessage = 'Привіт, ${msg.from.first_name}! Вітаю на сервері сбору данних щодо пташиних гнізд на лініях електропередачі';
     let keyboard = {
         reply_markup: {
           inline_keyboard: [
             [
               {
-                  text: 'Завантажи гніздо',
+                  text: 'Завантажити гніздо',
               callback_data: 'load'
             }, {
                 text: 'Перейти на сайт',
@@ -41,11 +41,11 @@ bot.on('callback_query', (query) => {
 });
 
  bot.on('photo', function (msg) {
-     const oneMessage = 'Завантажте локацію, натиснув Location';
+     const oneMessage = 'Завантажте локацію, натиснув Геолокація';
       const opts = {
     reply_markup: JSON.stringify({
       keyboard: [
-        [{text: 'Location', request_location: true}],
+        [{text: 'Геолокація', request_location: true}],
               ],
       resize_keyboard: true,
       one_time_keyboard: true,
@@ -59,11 +59,11 @@ bot.on('location', function (msg) {
   var loclong = msg.location.longitude;
   console.log(loclat);
   console.log(loclong);
-  const twoMessage = 'Ваші координати: ' + loclat + ', ' + loclong + '. Додайте свій контактний телефон, натиснув на клавіатурі Contact ';
+  const twoMessage = 'Ваші координати: ' + loclat + ', ' + loclong + '. Додайте свій контактний телефон, натиснув на клавіатурі Передати контакт ';
   const opts = {
     reply_markup: JSON.stringify({
       keyboard: [
-        [{ text: 'Contact', request_contact: true }],
+        [{ text: 'Передати контакт', request_contact: true }],
       ],
       resize_keyboard: true,
       one_time_keyboard: true,
