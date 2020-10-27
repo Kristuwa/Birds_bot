@@ -14,7 +14,7 @@ const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
 
 bot.onText(/\/start/, function (msg) {
   
-    let startMessage = 'Привіт, ${msg.from.first_name}! Вітаю на сервері сбору данних щодо пташиних гнізд на лініях електропередачі';
+    let startMessage = `Привіт, ${msg.from.first_name} ! Вітаю на сервері сбору данних щодо пташиних гнізд на лініях електропередачі`;
     let keyboard = {
         reply_markup: {
           inline_keyboard: [
