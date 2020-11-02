@@ -1,25 +1,6 @@
 const token = '1141579917:AAGoLMcdHD88bmYoSSqCdHjww3wYJWm0f-Y';
 const TelegramBot = require('node-telegram-bot-api');
- const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-client.connect();
-
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
-// replace the value below with the Telegram token you receive from @BotFather
-
+ 
  
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
