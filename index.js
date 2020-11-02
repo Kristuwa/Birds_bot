@@ -5,7 +5,24 @@ require('https').createServer().listen(process.env.PORT || 5000).on('request', f
 process.env["NTBA_FIX_319"] = 1;
 process.env['TELEGRAM_API_TOKEN'] = '1141579917:AAGoLMcdHD88bmYoSSqCdHjww3wYJWm0f-Y';
 const TelegramBot = require('node-telegram-bot-api');
- 
+ const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
+
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
 // replace the value below with the Telegram token you receive from @BotFather
 
  
